@@ -43,7 +43,7 @@ async def create_user():
     collection.insert_one(user)
     return {"message": "User created"}
 
-@app.put("/user")
+@app.post("/changeuser")
 async def update_user():
     collection.update_one({"name": "frietje jansens"}, {"$set": {"name": "dries achternaam"}})
     return {"message": "User updated"}
