@@ -16,7 +16,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -26,8 +26,6 @@ class User(BaseModel):
     name: str
 
 
-
-# Replace "username" and "password" with your actual credentials
 client = MongoClient("mongodb://root:example@db:27017/")
 db = client["mydatabase"]
 collection = db["users"]
@@ -38,12 +36,12 @@ async def get_user():
     return {"username": user["name"]}
 
 @app.post("/user")
-async def create_user():
-    user = {"name": "frietje jansens"}
-    collection.insert_one(user)
-    return {"message": "User created"}
+async def create_user(user: User):
+    user_data = {"name": "Thomas Deboel"}
+    collection.insert_one(user_data)
+    return user
 
 @app.post("/changeuser")
 async def update_user():
-    collection.update_one({"name": "frietje jansens"}, {"$set": {"name": "dries achternaam"}})
+    collection.update_one({"name": "Thomas Deboel"}, {"$set": {"name": "Frietje Jansens"}})
     return {"message": "User updated"}

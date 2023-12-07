@@ -6,11 +6,6 @@ from fastapi import HTTPException
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:8000",  # Allow localhost for development
-    "http://localhost",  # Allow localhost without port
-    "http://localhost:8080",  # Allow localhost with port 8080
-]
 
 app.add_middleware(
     CORSMiddleware,
