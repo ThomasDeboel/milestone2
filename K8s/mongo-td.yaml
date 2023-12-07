@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-td-deployment
+  labels:
+    app: mongo-td
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-td
+  template:
+    metadata:
+      labels:
+        app: mongo-td
+    spec:
+      containers:
+      - name: mongo-td
+        image: mongo:4.4
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: root
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: example
+        - name: MONGO_INITDB_DATABASE
+          value: mydatabase
+
+        - name: MONGO_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-td-config
+              key: mongo-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-td-service
+spec:
+  selector:
+    app: mongo-td
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
