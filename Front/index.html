@@ -19,7 +19,7 @@
 
         <script>
             // fetch user from API
-            fetch("api-td-service/user")
+            fetch("api-td-service:8000/user")
                 .then((res) => res.json())
                 .then((data) => {
                     // get user name
@@ -31,7 +31,7 @@
             function sendPostRequest() {
                 const name = "Thomas Deboel";
 
-                fetch("api-td-service/user", {
+                fetch("api-td-service:8000/user", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

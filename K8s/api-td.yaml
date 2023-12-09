@@ -33,3 +33,10 @@ spec:
       port: 8000
       targetPort: 8000
       nodePort: 30000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-td-config
+data:
+  api-url: api-td-service
