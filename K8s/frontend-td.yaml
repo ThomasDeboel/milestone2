@@ -29,7 +29,8 @@ spec:
   selector:
     app: front-td
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 80
       nodePort: 30080
