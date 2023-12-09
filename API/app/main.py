@@ -19,7 +19,7 @@ class User(BaseModel):
     name: str
 
 
-client = MongoClient("mongodb://root:example@mongo-td:27017/")
+client = MongoClient("mongodb://root:example@mongo-td-service:27017/")
 db = client["mydatabase"]
 collection = db["users"]
 

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lighttpd-ingress
+  namespace: default
+spec:
+  rules:
+    - host: lighttpd.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: front-td-service
+                port:
+                  name: http
