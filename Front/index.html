@@ -1,9 +1,3 @@
-<!--
-    This HTML file represents the front-end of a web application.
-    It contains a simple interface that displays a milestone message and a button to send a POST request to an API.
-    The user's name is fetched from the API and displayed dynamically in the milestone message.
-    The sendPostRequest() function sends a POST request to the API with a predefined name.
--->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,8 +7,10 @@
         <title>Milestone 2</title>
     </head>
     <body>
+        <!-- Display the user name -->
         <h1><span id="user">Loading...</span> has reached milestone 2!</h1>
 
+        <!-- Button to send a POST request -->
         <button onclick="sendPostRequest()">Send POST Request</button>
 
         <script>
@@ -31,6 +27,7 @@
             function sendPostRequest() {
                 const name = "Thomas Deboel";
 
+                // send POST request to API
                 fetch("api-td-service:8000/user", {
                     method: "POST",
                     headers: {
