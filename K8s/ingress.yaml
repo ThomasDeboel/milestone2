@@ -14,4 +14,24 @@ spec:
               service:
                 name: front-td-service
                 port:
-                  name: http
+                  number: 80
+    - host: fastapi.local
+      http:
+        paths:
+          - path: /user
+            pathType: Prefix
+            backend:
+              service:
+                name: fastapi-service
+                port:
+                  number: 8000
+    - host: fastapi.local
+      http:
+        paths:
+          - path: /changeuser
+            pathType: Prefix
+            backend:
+              service:
+                name: fastapi-service
+                port:
+                  number: 8000
