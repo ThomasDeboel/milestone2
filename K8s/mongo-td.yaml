@@ -1,46 +1,45 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1  # The version of the Kubernetes API to use
+kind: Deployment  # The kind of Kubernetes resource to create
 metadata:
-  name: mongo-td-deployment
+  name: mongo-td-deployment  # The name of the Deployment resource
   labels:
-    app: mongo-td
+    app: mongo-td  # Labels to apply to the Deployment for organization and selection
 spec:
-  replicas: 1
+  replicas: 1  # The number of replicas (pods) to maintain
   selector:
     matchLabels:
-      app: mongo-td
+      app: mongo-td  # The labels to use to select the pods managed by this Deployment
   template:
     metadata:
       labels:
-        app: mongo-td
+        app: mongo-td  # Labels to apply to the pods created by this Deployment
     spec:
       containers:
-      - name: mongo-td
-        image: mongo:4.4
+      - name: mongo-td  # The name of the container to create in each pod
+        image: mongo:4.4  # The image to use for the container
         ports:
-        - containerPort: 27017
+        - containerPort: 27017  # The port to expose on the container
         env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          value: root
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          value: example
-        - name: MONGO_INITDB_DATABASE
-          value: mydatabase
-
-        - name: MONGO_URL
+        - name: MONGO_INITDB_ROOT_USERNAME  # Environment variable to set in the container
+          value: root  # Value of the environment variable
+        - name: MONGO_INITDB_ROOT_PASSWORD  # Environment variable to set in the container
+          value: example  # Value of the environment variable
+        - name: MONGO_INITDB_DATABASE  # Environment variable to set in the container
+          value: mydatabase  # Value of the environment variable
+        - name: MONGO_URL  # Environment variable to set in the container
           valueFrom:
             configMapKeyRef:
-              name: mongo-td-config
-              key: mongo-url
+              name: mongo-td-config  # The name of the ConfigMap from which to get the value
+              key: mongo-url  # The key in the ConfigMap from which to get the value
 ---
-apiVersion: v1
-kind: Service
+apiVersion: v1  # The version of the Kubernetes API to use
+kind: Service  # The kind of Kubernetes resource to create
 metadata:
-  name: mongo-td-service
+  name: mongo-td-service  # The name of the Service resource
 spec:
   selector:
-    app: mongo-td
+    app: mongo-td  # The labels to use to select the pods to which to route traffic
   ports:
-    - protocol: TCP
-      port: 27017
-      targetPort: 27017
+    - protocol: TCP  # The protocol to use for the Service
+      port: 27017  # The port on which the Service will listen
+      targetPort: 27017  # The port on the pods to which to route traffic

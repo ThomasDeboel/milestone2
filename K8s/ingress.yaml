@@ -1,37 +1,37 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: networking.k8s.io/v1  # The version of the Kubernetes API to use
+kind: Ingress  # The kind of Kubernetes resource to create
 metadata:
-  name: lighttpd-ingress
-  namespace: default
+  name: lighttpd-ingress  # The name of the Ingress resource
+  namespace: default  # The namespace in which to create the resource
 spec:
   rules:
-    - host: lighttpd.local
+    - host: lighttpd.local  # The host to match for this rule
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /  # The path to match for this rule
+            pathType: Prefix  # The type of path match (Prefix means the path starts with the specified value)
             backend:
               service:
-                name: front-td-service
+                name: front-td-service  # The name of the service to which to route traffic
                 port:
-                  number: 80
-    - host: fastapi.local
+                  number: 80  # The port on the service to which to route traffic
+    - host: fastapi.local  # The host to match for this rule
       http:
         paths:
-          - path: /user
-            pathType: Prefix
+          - path: /user  # The path to match for this rule
+            pathType: Prefix  # The type of path match
             backend:
               service:
-                name: fastapi-service
+                name: fastapi-service  # The name of the service to which to route traffic
                 port:
-                  number: 8000
-    - host: fastapi.local
+                  number: 8000  # The port on the service to which to route traffic
+    - host: fastapi.local  # The host to match for this rule
       http:
         paths:
-          - path: /changeuser
-            pathType: Prefix
+          - path: /changeuser  # The path to match for this rule
+            pathType: Prefix  # The type of path match
             backend:
               service:
-                name: fastapi-service
+                name: fastapi-service  # The name of the service to which to route traffic
                 port:
-                  number: 8000
+                  number: 8000  # The port on the service to which to route traffic

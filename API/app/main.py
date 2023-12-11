@@ -18,7 +18,7 @@ class User(BaseModel):
     name: str
 
 # Connect to MongoDB
-client = MongoClient("mongodb://root:example@db:27017/")
+client = MongoClient("mongodb://root:example@mongo-td-service:27017/")
 db = client["mydatabase"]
 collection = db["users"]
 
@@ -40,3 +40,4 @@ async def update_user():
     # Update the name of a user in the database
     collection.update_one({"name": "Thomas Deboel"}, {"$set": {"name": "Frietje Jansens"}})
     return {"message": "User updated"}
+    

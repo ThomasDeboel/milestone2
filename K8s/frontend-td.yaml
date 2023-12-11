@@ -1,36 +1,36 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1  # The version of the Kubernetes API to use
+kind: Deployment  # The kind of Kubernetes resource to create
 metadata:
-  name: front-td-deployment
+  name: front-td-deployment  # The name of the Deployment resource
   labels:
-    app: front-td
+    app: front-td  # Labels to apply to the Deployment for organization and selection
 spec:
-  replicas: 1
+  replicas: 1  # The number of replicas (pods) to maintain
   selector:
     matchLabels:
-      app: front-td
+      app: front-td  # The labels to use to select the pods managed by this Deployment
   template:
     metadata:
       labels:
-        app: front-td
+        app: front-td  # Labels to apply to the pods created by this Deployment
     spec:
       containers:
-      - name: front-td
-        image: thomasje007/frontend:latest
+      - name: front-td  # The name of the container to create in each pod
+        image: thomasje007/frontend:latest  # The image to use for the container
         ports:
-        - containerPort: 80
+        - containerPort: 80  # The port to expose on the container
 ---
-apiVersion: v1
-kind: Service
+apiVersion: v1  # The version of the Kubernetes API to use
+kind: Service  # The kind of Kubernetes resource to create
 metadata:
-  name: front-td-service
+  name: front-td-service  # The name of the Service resource
 spec:
-  type: NodePort
+  type: NodePort  # The type of Service to create (NodePort exposes the Service on a static port on each Node)
   selector:
-    app: front-td
+    app: front-td  # The labels to use to select the pods to which to route traffic
   ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 80
-      nodePort: 30080
+    - name: http  # The name of the port (for reference purposes)
+      protocol: TCP  # The protocol to use for the Service
+      port: 80  # The port on which the Service will listen
+      targetPort: 80  # The port on the pods to which to route traffic
+      nodePort: 30080  # The port on each Node on which the Service will be exposed

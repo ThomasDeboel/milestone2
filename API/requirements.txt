@@ -1,6 +1,6 @@
-fastapi>=0.68.0,<0.69.0
-pydantic>=1.8.0,<2.0.0
-uvicorn>=0.15.0,<0.16.0
-pymongo
-python-multipart
-docker
+fastapi>=0.68.0,<0.69.0  // FastAPI framework for building APIs
+pydantic>=1.8.0,<2.0.0  // Data validation and parsing library
+uvicorn>=0.15.0,<0.16.0  // ASGI server for running FastAPI applications
+pymongo  // MongoDB driver for Python
+python-multipart  // Support for handling multipart form data in FastAPI
+docker  // Docker SDK for Python

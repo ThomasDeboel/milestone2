@@ -4,25 +4,24 @@ services:
   api:
     build: ./api
     ports:
-      - "8000:8000"
+      - "8000:8000" # Expose port 8000 on the host machine and map it to port 8000 in the container
     depends_on:
-      - db
+      - db # Ensure that the 'db' service is started before the 'api' service
   
   db:
-    image: mongo:latest
+    image: mongo:4.4 # Use the MongoDB version 4.4 image for the 'db' service
     ports:
-      - "27017:27017"
+      - "27017:27017" # Expose port 27017 on the host machine and map it to port 27017 in the container
     volumes:
-      - ./data/db:/data/db
+      - ./data/db:/data/db # Mount the local './data/db' directory to the '/data/db' directory in the container
     environment:
-      MONGO_INITDB_DATABASE: mydatabase
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
+      MONGO_INITDB_DATABASE: mydatabase # Set the initial database name to 'mydatabase'
+      MONGO_INITDB_ROOT_USERNAME: root # Set the initial root username to 'root'
+      MONGO_INITDB_ROOT_PASSWORD: example # Set the initial root password to 'example'
 
   frontend:
     build: ./frontend
     ports:
-      - "80:80"
+      - "80:80" # Expose port 80 on the host machine and map it to port 80 in the container
     depends_on:
-      - api
+      - api # Ensure that the 'api' service is started before the 'frontend' service

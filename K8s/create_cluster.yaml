@@ -1,19 +1,21 @@
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-  - role: control-plane
-    kubeadmConfigPatches:
+apiVersion: kind.x-k8s.io/v1alpha4  # The version of the Kubernetes API to use
+kind: Cluster  # The kind of Kubernetes resource to create
+nodes:  # List of nodes in the cluster
+  - role: control-plane  # This node is a control plane node (master)
+    kubeadmConfigPatches:  
+# Configuration patches to apply with kubeadm
       - |
-        kind: InitConfiguration
+        kind: InitConfiguration  # The kind of configuration to initialize
         nodeRegistration:
           kubeletExtraArgs:
-            node-labels: "ingress-ready=true"
-    extraPortMappings:
-      - containerPort: 80
-        hostPort: 8080
-        protocol: TCP
-      - containerPort: 443
-        hostPort: 443
-        protocol: TCP
-  - role: worker
-#kind create cluster --config create_cluster.yaml --name multicluster
+            node-labels: "ingress-ready=true"  
+# Label to apply to the node
+    extraPortMappings:  # Extra port mappings to apply to the node
+      - containerPort: 80  # The container port to map
+        hostPort: 8080  # The host port to which to map the container port
+        protocol: TCP  # The protocol to use for the port mapping
+      - containerPort: 443  # The container port to map
+        hostPort: 443  # The host port to which to map the container port
+        protocol: TCP  # The protocol to use for the port mapping
+  - role: worker  # This node is a worker node
+#kind create cluster --config create_cluster.yaml --name multicluster  # Command to create the cluster
